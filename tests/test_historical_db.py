@@ -66,3 +66,5 @@ def test_all_historical_records_have_valid_fields() -> None:
         assert r.total_pit_stops > 0
         assert 0.0 <= r.undercut_success_rate <= 1.0
         assert r.avg_pit_loss > 15.0
+        assert len(r.event_date) == 10
+        assert r.event_date.startswith(str(r.season))

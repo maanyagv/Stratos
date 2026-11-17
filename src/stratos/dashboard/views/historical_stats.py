@@ -48,7 +48,8 @@ def render_historical_stats_view(is_dark: bool = True) -> None:
 
     races_in_season = get_races_for_season(selected_season)
     race_options = [
-        f"{r.country_flag} R{r.round_num}: {r.race_name}" for r in races_in_season
+        f"{r.country_flag} R{r.round_num}: {r.race_name} • 📅 {r.event_date}"
+        for r in races_in_season
     ]
 
     with c_race:
@@ -61,7 +62,24 @@ def render_historical_stats_view(is_dark: bool = True) -> None:
         )
         selected_race = races_in_season[selected_race_idx]
 
-    st.markdown("<div style='height: 0.8rem;'></div>", unsafe_allow_html=True)
+    bg_box = "background: rgba(2, 132, 199, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);"
+    st.markdown(
+        f"""
+        <div style="{bg_box} border-radius: 6px; padding: 0.5rem 0.9rem; margin-bottom: 0.75rem;
+                    display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 0.90rem; font-weight: 700; color: #f8fafc;">
+                {selected_race.country_flag} {selected_race.race_name}
+                &bull; <span style="color: var(--text-dim);">{selected_race.circuit_name}</span>
+            </div>
+            <div style="font-size: 0.82rem; color: #38bdf8; font-weight: 600;">
+                📅 Race Date: <span style="color: #f8fafc; font-weight: 700;">
+                    {selected_race.event_date}
+                </span>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     # 2. Key Race Metrics Top Cards (Row of 4)
     m1, m2, m3, m4 = st.columns(4)

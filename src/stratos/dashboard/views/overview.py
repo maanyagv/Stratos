@@ -80,10 +80,12 @@ def render_overview_view(db: StratosDB | None = None, is_dark: bool = True) -> N
                     {next_event.event_name}
                 </div>
                 <div style="font-size: 0.80rem; color: var(--text-muted); margin-top: 2px;">
-                    {ev_country} &bull; Round {next_event.round_number} &bull; {next_event.season}
+                    {ev_country} &bull; R{next_event.round_number} &bull;
+                    📅 <b>{next_event.event_date}</b>
                 </div>
-                <div style="margin-top: 8px;">
-                    <span class="badge badge-blue">Automatic Detection</span>
+                <div style="margin-top: 8px; display: flex; gap: 4px; flex-wrap: wrap;">
+                    <span class="badge badge-cyan">📅 {next_event.event_date}</span>
+                    <span class="badge badge-blue">Auto Detection</span>
                 </div>
             </div>
             """,
@@ -190,7 +192,7 @@ def render_overview_view(db: StratosDB | None = None, is_dark: bool = True) -> N
         with db.get_connection() as conn:
             rows = conn.execute(
                 """
-                SELECT e.season, e.round_number, e.event_name, sr.driver_code,
+                SELECT e.season, e.round_number, e.event_name, e.event_date, sr.driver_code,
                        sr.finish_position, sr.points, sr.grid_position
                 FROM session_results sr
                 JOIN sessions s ON sr.session_id = s.id
@@ -211,7 +213,8 @@ def render_overview_view(db: StratosDB | None = None, is_dark: bool = True) -> N
 
             for r in rows:
                 key = (r["season"], r["round_number"])
-                lbl = f"{r['season']} R{r['round_number']} ({r['event_name'][:7]})"
+                dt_str = r["event_date"] if r["event_date"] else ""
+                lbl = f"{r['season']} R{r['round_number']} ({dt_str})"
                 if key not in rounds_seen:
                     rounds_seen.add(key)
                     race_labels.append(lbl)

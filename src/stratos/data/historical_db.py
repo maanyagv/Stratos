@@ -69,6 +69,7 @@ class RaceHistoricalStats:
     weather_condition: str
     undercut_success_rate: float
     avg_pit_loss: float
+    event_date: str = ""
 
 
 # Curated F1 Race Statistics spanning 2021 through 2026
@@ -92,6 +93,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Clear & Dry",
         undercut_success_rate=0.76,
         avg_pit_loss=24.2,
+        event_date="2026-03-01",
     ),
     RaceHistoricalStats(
         season=2026,
@@ -111,6 +113,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Clear Night",
         undercut_success_rate=0.82,
         avg_pit_loss=21.6,
+        event_date="2026-03-08",
     ),
     RaceHistoricalStats(
         season=2026,
@@ -130,6 +133,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Sunny & Overcast",
         undercut_success_rate=0.68,
         avg_pit_loss=22.8,
+        event_date="2026-03-22",
     ),
     RaceHistoricalStats(
         season=2026,
@@ -149,6 +153,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Dry & Cool",
         undercut_success_rate=0.74,
         avg_pit_loss=23.5,
+        event_date="2026-04-05",
     ),
     RaceHistoricalStats(
         season=2026,
@@ -168,6 +173,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Warm & Sunny",
         undercut_success_rate=0.28,
         avg_pit_loss=21.8,
+        event_date="2026-05-24",
     ),
     RaceHistoricalStats(
         season=2026,
@@ -187,6 +193,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Mixed / Rain Shower",
         undercut_success_rate=0.84,
         avg_pit_loss=25.6,
+        event_date="2026-07-05",
     ),
     RaceHistoricalStats(
         season=2026,
@@ -206,6 +213,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Dry & Cloudy",
         undercut_success_rate=0.62,
         avg_pit_loss=19.2,
+        event_date="2026-07-26",
     ),
     RaceHistoricalStats(
         season=2026,
@@ -225,6 +233,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Hot & Sunny",
         undercut_success_rate=0.71,
         avg_pit_loss=21.5,
+        event_date="2026-09-06",
     ),
     # --- 2025 SEASON ---
     RaceHistoricalStats(
@@ -245,6 +254,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Dry & Windy",
         undercut_success_rate=0.72,
         avg_pit_loss=24.5,
+        event_date="2025-03-02",
     ),
     RaceHistoricalStats(
         season=2025,
@@ -264,6 +274,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Dry",
         undercut_success_rate=0.25,
         avg_pit_loss=21.9,
+        event_date="2025-05-25",
     ),
     RaceHistoricalStats(
         season=2025,
@@ -283,6 +294,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Wet to Dry Transition",
         undercut_success_rate=0.81,
         avg_pit_loss=25.8,
+        event_date="2025-07-06",
     ),
     # --- 2024 SEASON ---
     RaceHistoricalStats(
@@ -303,6 +315,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Clear Night",
         undercut_success_rate=0.74,
         avg_pit_loss=24.6,
+        event_date="2024-03-02",
     ),
     RaceHistoricalStats(
         season=2024,
@@ -322,6 +335,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Hot & Sunny",
         undercut_success_rate=0.15,
         avg_pit_loss=21.8,
+        event_date="2024-05-26",
     ),
     RaceHistoricalStats(
         season=2024,
@@ -341,6 +355,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Mixed Rain Showers",
         undercut_success_rate=0.88,
         avg_pit_loss=25.6,
+        event_date="2024-07-07",
     ),
     RaceHistoricalStats(
         season=2024,
@@ -360,6 +375,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Dry & Overcast",
         undercut_success_rate=0.69,
         avg_pit_loss=19.4,
+        event_date="2024-07-28",
     ),
     RaceHistoricalStats(
         season=2024,
@@ -379,6 +395,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Scorching Sun",
         undercut_success_rate=0.73,
         avg_pit_loss=21.6,
+        event_date="2024-09-01",
     ),
     # --- 2023 SEASON ---
     RaceHistoricalStats(
@@ -399,6 +416,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Clear Night",
         undercut_success_rate=0.78,
         avg_pit_loss=24.8,
+        event_date="2023-03-05",
     ),
     RaceHistoricalStats(
         season=2023,
@@ -418,6 +436,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Dry to Sudden Rain",
         undercut_success_rate=0.33,
         avg_pit_loss=22.1,
+        event_date="2023-05-28",
     ),
     RaceHistoricalStats(
         season=2023,
@@ -437,6 +456,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Dry & Breezy",
         undercut_success_rate=0.75,
         avg_pit_loss=25.4,
+        event_date="2023-07-09",
     ),
     # --- 2022 SEASON ---
     RaceHistoricalStats(
@@ -457,6 +477,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Clear Night",
         undercut_success_rate=0.85,
         avg_pit_loss=24.9,
+        event_date="2022-03-20",
     ),
     # --- 2021 SEASON ---
     RaceHistoricalStats(
@@ -477,6 +498,7 @@ HISTORICAL_RACES: list[RaceHistoricalStats] = [
         weather_condition="Clear & Gusty",
         undercut_success_rate=0.88,
         avg_pit_loss=24.4,
+        event_date="2021-03-28",
     ),
 ]
 

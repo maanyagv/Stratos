@@ -64,7 +64,10 @@ def _render_forecast_tab(
     """Render the statistical machine-learning prediction & explainability engine."""
     col_ev, col_stg, col_drv = st.columns([1.3, 1.2, 0.9])
 
-    event_names = [f"{e['season']} - {e['event_name']} (R{e['round_number']})" for e in events]
+    event_names = [
+        f"{e['season']} R{e['round_number']}: {e['event_name']} • 📅 {e.get('event_date', 'TBD')}"
+        for e in events
+    ]
     default_idx = 0
     for idx, e in enumerate(events):
         if (
@@ -103,6 +106,32 @@ def _render_forecast_tab(
             }.get(x, x),
             key="fc_driver",
         )
+
+    # Grand Prix Event Metadata Ribbon specifying exact date & venue
+    ev_dt = selected_event.get("event_date", "TBD")
+    ev_loc = selected_event.get("location", "Grand Prix Circuit")
+    ev_cntry = selected_event.get("country", "🏁")
+    bg_meta = "background: rgba(2, 132, 199, 0.08); border: 1px solid rgba(56, 189, 248, 0.25);"
+    st.markdown(
+        f"""
+        <div style="{bg_meta} border-radius: 6px; padding: 0.55rem 0.9rem; margin-bottom: 0.75rem;
+                    display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <span style="font-weight: 700; color: #f8fafc; font-size: 0.92rem;">
+                    {ev_cntry} {selected_event.get('official_name', selected_event['event_name'])}
+                </span>
+                <span style="color: var(--text-dim); font-size: 0.80rem; margin-left: 0.5rem;">
+                    ({ev_loc})
+                </span>
+            </div>
+            <div style="font-size: 0.82rem; color: #38bdf8; font-weight: 600;">
+                📅 Race Date: <span style="color: #f8fafc; font-weight: 700;">{ev_dt}</span>
+                &bull; R{selected_event['round_number']}/{len(events)}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     with st.expander("🛠️ Engineering Assumptions & Interactive Overrides", expanded=False):
         ca1, ca2, ca3, ca4 = st.columns(4)
@@ -455,17 +484,25 @@ def _render_telemetry_discussion_tab(
 
     with col_t1:
         st.markdown("##### 📍 Circuit & Environmental Conditions")
+        circuit_dates = {
+            "bahrain": "2026-03-01",
+            "suzuka": "2026-04-05",
+            "monaco": "2026-05-24",
+            "silverstone": "2026-07-05",
+            "spa": "2026-07-26",
+            "monza": "2026-09-06",
+        }
         circuit_choice = st.selectbox(
             "Circuit Profile",
-            options=["bahrain", "silverstone", "monaco", "spa", "monza", "suzuka"],
+            options=["bahrain", "suzuka", "monaco", "silverstone", "spa", "monza"],
             index=0,
             format_func=lambda x: {
-                "bahrain": "Bahrain International Circuit (Sakhir)",
-                "silverstone": "Silverstone Circuit (UK)",
-                "monaco": "Circuit de Monaco (Monte Carlo)",
-                "spa": "Circuit de Spa-Francorchamps (Belgium)",
-                "monza": "Autodromo Nazionale Monza (Italy)",
-                "suzuka": "Suzuka International Racing Course (Japan)",
+                "bahrain": f"🇧🇭 Bahrain (Sakhir) • 📅 {circuit_dates['bahrain']}",
+                "suzuka": f"🇯🇵 Suzuka (Japan) • 📅 {circuit_dates['suzuka']}",
+                "monaco": f"🇲🇨 Monaco (Monte Carlo) • 📅 {circuit_dates['monaco']}",
+                "silverstone": f"🇬🇧 Silverstone (UK) • 📅 {circuit_dates['silverstone']}",
+                "spa": f"🇧🇪 Spa-Francorchamps • 📅 {circuit_dates['spa']}",
+                "monza": f"🇮🇹 Monza (Italy) • 📅 {circuit_dates['monza']}",
             }.get(x, x.title()),
             key="eng_circuit",
         )

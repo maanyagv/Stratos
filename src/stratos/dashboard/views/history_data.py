@@ -62,9 +62,12 @@ def render_history_data_view(
 
             with db.get_connection() as conn:
                 q = """
-                    SELECT e.season, e.round_number, e.event_name, e.location,
-                           s.session_type, sr.driver_code, sr.grid_position,
-                           sr.finish_position, sr.points, sr.finish_status
+                    SELECT e.season as Season, e.round_number as Round,
+                           e.event_date as "Race Date",
+                           e.event_name as "Grand Prix", e.location as Circuit,
+                           s.session_type as Session, sr.driver_code as Driver,
+                           sr.grid_position as Grid, sr.finish_position as Finish,
+                           sr.points as Points, sr.finish_status as Status
                     FROM session_results sr
                     JOIN sessions s ON sr.session_id = s.id
                     JOIN events e ON s.event_id = e.id

@@ -61,6 +61,7 @@ def seed_database_with_f1_history(db: StratosDB, store: ParquetStore | None = No
         ev_id = f"{r.season}_{r.round_num:02d}_{r.race_name[:3].upper()}"
 
         # 1. Upsert Event
+        ev_date = r.event_date if r.event_date else f"{r.season}-06-15"
         db.upsert_event(
             {
                 "id": ev_id,
@@ -71,7 +72,7 @@ def seed_database_with_f1_history(db: StratosDB, store: ParquetStore | None = No
                 "country": r.country_flag,
                 "location": r.circuit_name.split("(")[0].strip(),
                 "circuit_key": r.circuit_name.lower().replace(" ", "_"),
-                "event_date": f"{r.season}-06-15",
+                "event_date": ev_date,
                 "is_sprint": 0,
             }
         )
@@ -86,7 +87,7 @@ def seed_database_with_f1_history(db: StratosDB, store: ParquetStore | None = No
                 "round_number": r.round_num,
                 "session_type": "Race",
                 "session_name": "Race",
-                "session_date": f"{r.season}-06-15",
+                "session_date": ev_date,
                 "total_laps": 55,
                 "total_drivers": 20,
                 "has_laps": 1,
